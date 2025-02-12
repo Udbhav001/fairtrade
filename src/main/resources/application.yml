@@ -1,6 +1,13 @@
 company:
-  apiUrl: https://www.alphavantage.co/query?function=OVERVIEW&symbol=
-  apiKey: LIAYMT70Q1XLIOZ8
+  overview:
+    apiUrl: https://www.alphavantage.co/query?function=OVERVIEW&symbol=
+    apiKey: LIAYMT70Q1XLIOZ8
+  news:
+    apiUrl: https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=
+    apiKey: CQ8MY1HG3V32YRWM
+  price:
+    apiUrl: https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
+    apiKey: P5WNZDNYOYXB8HMY #AOJJYKHUH45Y1B8Q
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/fairtrade
@@ -14,4 +21,4 @@ spring:
       ddl-auto: update
 
   application:
-    name: demo
+    name: fairtrade

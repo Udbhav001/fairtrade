@@ -16,43 +16,29 @@ public class Company {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String tickerSymbol; // Example: "AAPL"
+    private String tickerSymbol;
 
     @Column(nullable = false)
-    private String name; // Example: "Apple Inc."
+    private String name;
 
     @Column(nullable = false)
-    private String sector; // Example: "Technology"
+    private String sector;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(nullable = false)
+    private String address;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(nullable = false)
+    private Long sharesOutstanding;
 
-    public String getTickerSymbol() {
-        return tickerSymbol;
-    }
+    private String industry;
 
-    public void setTickerSymbol(String tickerSymbol) {
-        this.tickerSymbol = tickerSymbol;
-    }
+    @Column(length = 2000)
+    private String description;
 
-    public String getName() {
-        return name;
-    }
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private DailyPrice price;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private Long marketCap;
 
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
+    private String stockExchange;
 }

@@ -1,13 +1,13 @@
 package com.apex.fairtrade.company.service;
 
 import com.apex.fairtrade.company.entity.Company;
+import com.apex.fairtrade.company.entity.DailyPrice;
 import com.apex.fairtrade.company.mapper.CompanyMapper;
 import com.apex.fairtrade.company.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,13 +18,19 @@ public class CompanyService {
     @Autowired
     CompanyRepository companyRepository;
 
-    @Value("${company.apiUrl}")
+    @Autowired
+    DailyPriceService dailyPriceService;
+
+    @Value("${company.overview.apiUrl}")
     String apiUrl;
 
-    @Value("${company.apiKey}")
+    @Value("${company.overview.apiKey}")
     String apiKey;
 
-    RestClient restClient = RestClient.builder().build();;
+    RestClient restClient = RestClient.builder().build();
+
+    @Autowired
+    NewsService newsService;
 
     @Autowired
     CompanyMapper companyMapper;
@@ -41,7 +47,9 @@ public class CompanyService {
         Company company = null;
         if (companyMap != null) {
             company = companyMapper.convert(companyMap);
+            dailyPriceService.refreshCompanyPrice(symbol);
             companyRepository.save(company);
+            newsService.addNews(symbol);
         }
         return company;
     }
