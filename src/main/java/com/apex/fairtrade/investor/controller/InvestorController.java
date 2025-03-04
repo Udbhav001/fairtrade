@@ -25,4 +25,6 @@ public class InvestorController {
     public  ResponseEntity<Investor> getInvestor(@PathVariable Long id) {
         return new ResponseEntity<>(investorService.getInvestor(id), HttpStatus.OK);
     }
+
+    //Rajesh  
 }
